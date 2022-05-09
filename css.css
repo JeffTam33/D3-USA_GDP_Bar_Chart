@@ -5,15 +5,15 @@ body{
 }
 
 #main-wrapper {
-  background-color: #AAEFDF;
-  height: 600px;
-  width: 1000px;
+  background-color: #FFFFFF;
+  height: 530px;
+  width: 950px;
   margin: auto;
+  margin-top: 100px;
   text-align: center;
   font-family: Courier Prime, monospace;
   #title{
     display: inline-block;
     font-size: 24px;
-    margin-top: 15px;
   }
 }
