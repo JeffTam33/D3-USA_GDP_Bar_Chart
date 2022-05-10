@@ -56,5 +56,5 @@ fetch("https://raw.githubusercontent.com/JeffTam33/D3-Greenland_GDP_Chart/main/g
                             .attr("x", (d, i) => i * 16 + padding)
                             .attr("y", (d, i) => (yScale(d[1])))
                             .attr("width", 10)
-                            .attr("height", (d, i) => height - yScale(d[1]));
+                            .attr("height", (d, i) => height - padding - yScale(d[1]));
               })
