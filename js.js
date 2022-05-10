@@ -14,7 +14,6 @@ var svgContainer = d3.select(".visual-data")
 fetch("https://raw.githubusercontent.com/JeffTam33/D3-Greenland_GDP_Chart/main/greenland_gdp_data.json")
               .then(response => response.json())
               .then(data => {
-                  console.log(data.data);
                 //Scales for x and y axises
                 const xScale = d3.scaleLinear()
                                  .domain([data.begin_year, data.end_year + 1])
@@ -54,8 +53,8 @@ fetch("https://raw.githubusercontent.com/JeffTam33/D3-Greenland_GDP_Chart/main/g
                             .data(data.data)
                             .enter()
                             .append("rect")
-                            .attr("x", (d, i) => (i * 16) + padding)
-                            .attr("y", (d, i) => (height - d[1]) - padding)
+                            .attr("x", (d, i) => i * 16 + padding)
+                            .attr("y", (d, i) => (yScale(d[1])))
                             .attr("width", 10)
-                            .attr("height", (d, i) => d[1])
+                            .attr("height", (d, i) => height - yScale(d[1]));
               })
