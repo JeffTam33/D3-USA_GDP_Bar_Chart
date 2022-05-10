@@ -14,25 +14,48 @@ var svgContainer = d3.select(".visual-data")
 fetch("https://raw.githubusercontent.com/JeffTam33/D3-Greenland_GDP_Chart/main/greenland_gdp_data.json")
               .then(response => response.json())
               .then(data => {
-                console.log(data.begin_year)
+                  console.log(data.data);
+                //Scales for x and y axises
                 const xScale = d3.scaleLinear()
                                  .domain([data.begin_year, data.end_year + 1])
                                  .range([padding, width - padding]);
                 const yScale = d3.scaleLinear()
                                  .domain([0, d3.max(data.data, (d) => d[1])])
                                  .range([height - padding, padding]);
+                //Position of Axises
                 const xAxis = d3.axisBottom(xScale);
                 const yAxis = d3.axisLeft(yScale);
+                //Call Axis to show on screen
                 svgContainer.append("g")
+                            .attr("id", "x-axis")
                             .attr("transform", "translate(0, " + (height - padding) + ")")
+                            .attr("id", "x-axis")
                             .call(xAxis);
                 svgContainer.append("g")
+                            .attr("id", "y-axis")
                             .attr("transform", "translate(" + padding +" 0)")
                             .call(yAxis);
+                //X-axis title
                 svgContainer.append("text")
-                            .attr("x", (height*-1) + padding)
-                            .attr("y", padding/5)
+                            .attr("id", "y-axis-title")
+                            .attr("x", width / 2)
+                            .attr("y", height - (padding / 4))
+                            .text("Year");
+                //Y-axis title
+                svgContainer.append("text")
+                            .attr("id", "x-axis-title")
+                            .attr("x", (height * -1) + padding)
+                            .attr("y", padding / 5)
                             .attr("transform", "rotate(-90)")
                             .text("Gross Domestic Product \(USD millions\)");
-                
+                //Bar reactangles
+                svgContainer.selectAll("rect")
+                            .append("svg")
+                            .data(data.data)
+                            .enter()
+                            .append("rect")
+                            .attr("x", (d, i) => (i * 16) + padding)
+                            .attr("y", (d, i) => (height - d[1]) - padding)
+                            .attr("width", 10)
+                            .attr("height", (d, i) => d[1])
               })
