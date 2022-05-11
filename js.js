@@ -1,9 +1,12 @@
-//json = fetch("https://raw.githubusercontent.com/JeffTam33/D3-Greenland_GDP_Chart/main/greenland_gdp_data.json?token=GHSAT0AAAAAABUF2QNVSW2NK5WS7V66PU7QYTYE4CA");
-const width = 900;
-const height = 450;
+//Data used from https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/GDP-data.json
+const width = 1600;
+const height = 530;
 const padding = 50;
-const xScale = d3.scaleLinear()
-                 .domain()
+const barWidth = 5;
+//Tool Tips
+var tooltips = d3.select(".visual-data")
+                 .append("div")
+                 .attr("id", "tooltip")
 
 var svgContainer = d3.select(".visual-data")
             .append("svg")
@@ -11,12 +14,13 @@ var svgContainer = d3.select(".visual-data")
             .attr("height", height)
             .style("background-color", "#FFFFFF")
 
-fetch("https://raw.githubusercontent.com/JeffTam33/D3-Greenland_GDP_Chart/main/greenland_gdp_data.json")
+fetch("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/GDP-data.json")
               .then(response => response.json())
               .then(data => {
                 //Scales for x and y axises
-                const xScale = d3.scaleLinear()
-                                 .domain([data.begin_year, data.end_year + 1])
+                var dataToDateObj = data.data.map(data => new Date(data[0]));
+                const xScale = d3.scaleTime()
+                                 .domain([d3.min(dataToDateObj), d3.max(dataToDateObj)])
                                  .range([padding, width - padding]);
                 const yScale = d3.scaleLinear()
                                  .domain([0, d3.max(data.data, (d) => d[1])])
@@ -48,13 +52,17 @@ fetch("https://raw.githubusercontent.com/JeffTam33/D3-Greenland_GDP_Chart/main/g
                             .attr("transform", "rotate(-90)")
                             .text("Gross Domestic Product \(USD millions\)");
                 //Bar reactangles
-                svgContainer.selectAll("rect")
-                            .append("svg")
+                svgContainer.selectAll("svg")
+                            .append("rect")
                             .data(data.data)
                             .enter()
                             .append("rect")
-                            .attr("x", (d, i) => i * 16 + padding)
-                            .attr("y", (d, i) => (yScale(d[1])))
-                            .attr("width", 10)
-                            .attr("height", (d, i) => height - padding - yScale(d[1]));
+                            .style("fill", "#9EE37D")
+                            .attr("class", "bar")
+                            .attr("data-date", (d, i) => data.data[i][0])
+                            .attr("data-gdp", (d, i) => data.data[i][1])
+                            .attr("x", (d, i) => xScale(dataToDateObj[i]))
+                            .attr("y", d => yScale(d[1]))
+                            .attr("width", barWidth)
+                            .attr("height", d => height - padding - yScale(d[1]));
               })
