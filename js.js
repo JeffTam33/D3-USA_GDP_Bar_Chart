@@ -1,3 +1,4 @@
+//Babel
 //Data used from https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/GDP-data.json
 const width = 1600;
 const height = 530;
@@ -7,6 +8,13 @@ const barWidth = 5;
 var tooltips = d3.select(".visual-data")
                  .append("div")
                  .attr("id", "tooltip")
+                 .attr("class", "tooltip-hidden")
+                 .style("opacity", 0)
+
+var tooltipWrapper = d3.select(".visual-data")
+                       .append("div")
+                       .attr("class", "tooltip-wrapper")
+                       .style("opacity", 0)
 
 var svgContainer = d3.select(".visual-data")
             .append("svg")
@@ -64,5 +72,15 @@ fetch("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/maste
                             .attr("x", (d, i) => xScale(dataToDateObj[i]))
                             .attr("y", d => yScale(d[1]))
                             .attr("width", barWidth)
-                            .attr("height", d => height - padding - yScale(d[1]));
+                            .attr("height", d => height - padding - yScale(d[1]))
+                            .on("mouseover", function (event, d){
+                              tooltipWrapper.transition()
+                                            .duration(0)
+                                            .style("height", 100)
+                                            .style("width", 100)
+                                            .style("opacity", .9)
+                                            .style("left", 100)
+                                            .style("top", 100)
+                                            .style("transform", "translateX(50)")
+                            })
               })
