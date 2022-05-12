@@ -1,3 +1,4 @@
+//SCSS
 @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&family=Lato&display=swap');
 // font-family: 'Courier Prime', monospace;
 body{
@@ -6,9 +7,9 @@ body{
 
 #main-wrapper {
   background-color: #FFFFFF;
-  height: 530px;
-  width: 950px;
   margin: auto;
+  width: 1700px;
+  height: 600px;
   margin-top: 100px;
   text-align: center;
   font-family: Courier Prime, monospace;
@@ -16,4 +17,18 @@ body{
     display: inline-block;
     font-size: 24px;
   }
+  .bar {
+    color: #9EE37D;
+  }
 }
+
+.tooltips {
+  display: block;
+  position: absolute;
+  height: auto;
+  width: auto;
+  background-color: #358600;
+  box-shadow: 1px 1px 5px;
+  color: #FFFFFF;
+}
+
