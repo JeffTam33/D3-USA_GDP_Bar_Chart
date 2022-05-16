@@ -1,25 +1,26 @@
 //SCSS
+//Font Roboto Flex
 @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&family=Lato&display=swap');
-// font-family: 'Courier Prime', monospace;
-body{
-  background-color: #CFFCFF;
+
+body {
+  background-color: #414535;
 }
 
 #main-wrapper {
   background-color: #FFFFFF;
   margin: auto;
-  width: 1700px;
-  height: 600px;
   margin-top: 100px;
+  width: 1200px;
+  height: 550px;
   text-align: center;
-  font-family: Courier Prime, monospace;
   #title{
-    display: inline-block;
-    font-size: 24px;
+    font-family: Roboto Flex, monospace;
+    font-size: 40px;
   }
-  .bar {
-    color: #9EE37D;
-  }
+}
+
+.dot {
+  stroke: #000000;
 }
 
 .tooltips {
@@ -27,8 +28,15 @@ body{
   position: absolute;
   height: auto;
   width: auto;
-  background-color: #358600;
+  background-color: #96BBBB;
   box-shadow: 1px 1px 5px;
-  color: #FFFFFF;
 }
 
+.legend {
+  display: inline-block;
+  position: absolute;
+  height: auto;
+  width: auto;
+  background-color: #C19875;
+  box-shadow: 1px 1px 0px;
+}
