@@ -11,18 +11,49 @@ var tooltips = d3.select(".visual-data")
                  .attr("id", "tooltip")
                  .attr("class", "tooltips")
                  .style("opacity", 1);
-
-var legend = d3.select(".visual-data")
-               .append("div")
-               .attr("id", "legend")
-               .attr("class", "legend")
-               .style("opacity", 1)
+      
 
 var svgContainer = d3.select(".visual-data")
             .append("svg")
             .attr("width", width)
             .attr("height", height)
             .style("background-color", "#FFFFFF");
+
+
+var legend = svgContainer.append("g")
+                         .attr("id", "legend")
+legend.selectAll("#legend")
+      .append("g")
+      .attr("class", "legend-label")
+      .attr("transform", "(0, "+ 100 +")")
+
+legend.append("rect")
+      .attr("x", width - padding * 4)
+      .attr("y", height - padding * 4)
+      .attr("height", 10)
+      .attr("width", 10)
+      .style("fill", "#2E86AB")
+
+legend.append("rect")
+      .attr("x", width - padding * 4)
+      .attr("y", height - padding * 3)
+      .attr("height", 10)
+      .attr("width", 10)
+      .style("fill", "#F24236")
+
+legend.append("text")
+      .attr("x", width - padding / 2)
+      .attr("y", height - padding * 4)
+      .attr("dy", ".55em")
+      .style("text-anchor", "end")
+      .text("No Doping Allegations")
+
+legend.append("text")
+      .attr("x", width - padding)
+      .attr("y", height - padding * 3)
+      .attr("dy", ".55em")
+      .style("text-anchor", "end")
+      .text("Doping Allegations")
 
 fetch("https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/cyclist-data.json")
               .then(response => response.json())
