@@ -28,15 +28,18 @@ body {
   position: absolute;
   height: auto;
   width: auto;
+  font-family: Roboto Flex, monospace;
+  font-size: 16px;
   background-color: #96BBBB;
   box-shadow: 1px 1px 5px;
 }
 
 .legend {
-  display: inline-block;
-  position: absolute;
-  height: auto;
-  width: auto;
-  background-color: #C19875;
+  display: block;
+  position: relative;
+  height: 50px;
+  width: 120px;
+  float: right;
+  margin-right: 25px;
   box-shadow: 1px 1px 0px;
 }
